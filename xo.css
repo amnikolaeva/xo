@@ -27,3 +27,7 @@ table {
   background: #e4e4e4; 
   cursor: pointer; 
 }
+
+.hit {
+  background-color: rgb(241, 67, 23);
+}
