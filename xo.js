@@ -16,10 +16,10 @@ var model = {
         for (var i = 0; i < cells.length; i++) {
             var count = 0;
             var j = 0;
-            if (this.cells[j][i] == O) {
+            if (this.cells[j][i] == "O") {
                 count++;
             } 
-            else if (this.cells[j][i] == X) {
+            else if (this.cells[j][i] == "X") {
                 return count;
             }  
             j++;
@@ -29,10 +29,10 @@ var model = {
         for (var i = 0; i < cells.length; i++) {
             var count = 0;
             var j = 0;
-            if (this.cells[i][j] == O) {
+            if (this.cells[i][j] == "O") {
                 count++;
             } 
-            else if (this.cells[i][j] == X) {
+            else if (this.cells[i][j] == "X") {
                 return count;
             }
             j++;
@@ -41,10 +41,10 @@ var model = {
     countDiagonalMatch1: function() {
         for (var i = 0, j = 0; i < cells.length, j < cells.length; i++, j++) {
             var count = 0;
-            if (this.cells[i][j] == O) {
+            if (this.cells[i][j] == "O") {
                 count++;
             } 
-            else if (this.cells[i][j] == X) {
+            else if (this.cells[i][j] == "X") {
                 return count;
             }
         }
@@ -52,10 +52,10 @@ var model = {
     countDiagonalMatch2: function() {
         for (var i = 0, j = 2; i < cells.length, j < cells.length; i++, j--) {
             var count = 0;
-            if (this.cells[i][j] == O) {
+            if (this.cells[i][j] == "O") {
                 count++;
             } 
-            else if (this.cells[i][j] == X) {
+            else if (this.cells[i][j] == "X") {
                 return count;
             }
         }
