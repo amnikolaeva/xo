@@ -1,7 +1,11 @@
-function handleClick(eventObj) {
-    var cell = eventObj.target;
-    var guess = cell.id;
-    var zaq = document.getElementById(guess);
+
+
+var view = {
+    displayStroke: function() {
+        document.getElementById("board").onclick = function(event) {
+            console.log(event);
+        }
+    }
 }
 var model = {
     cellsSize: 9,
@@ -10,6 +14,12 @@ var model = {
         [ , , ],
         [ , , ]
     ],
+    acceptStroke: function(numCell) {
+        var combinations = [["11", "12", "13"], ["21", "22", "23"], ["31", "32", "33"]];
+        var i = indexOf(numCell);
+
+        
+    },
     fire: function(stroke) {
     },
     countHorizontalMatches: function() {
@@ -59,5 +69,14 @@ var model = {
                 return count;
             }
         }
+    }
+}
+
+var controller = {
+    handleClick: function(eventObj) {
+        var cell = eventObj.target;
+        var guess = cell.id;
+        var numCell = document.getElementById(guess);
+        return numCell;
     }
 }

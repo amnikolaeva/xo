@@ -28,6 +28,10 @@ table {
   cursor: pointer; 
 }
 
+#reset-game {
+  display: block;
+  margin: 0 auto;
+}
 .hit {
   background-color: rgb(241, 67, 23);
 }
