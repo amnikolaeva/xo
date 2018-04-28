@@ -14,11 +14,34 @@ var model = {
         [ , , ],
         [ , , ]
     ],
+    player: "X",
+    count: 0,
     acceptStroke: function(numCell) {
-        var combinations = [["11", "12", "13"], ["21", "22", "23"], ["31", "32", "33"]];
-        var i = indexOf(numCell);
-
-        
+        //var combinations = [["00", "01", "02"], ["10", "11", "12"], ["20", "21", "22"]];
+        //for (var i = 0; i < this.cells.length; i++) {
+        //    var j = this.cells[i].indexOf(numCell);
+        //    if (j >= 0) {
+        //        var i = [i, j];
+        //        var index = i.join("");
+        //        return index;
+        //    }
+        //} 
+        var i = numCell.charAt(0);
+        var j = numCell.charAt(1);
+        if (!this.cells[i][j].textContent) {
+            this.cells[i][j] = this.player;
+        }
+        changePlayer();
+        this.count++;
+        if (this.count == 9) {
+            alert("Игра закончена");
+        }
+    },  
+    changePlayer: function() {
+        if (this.player === "X") {
+            this.player = "O";
+        }
+        else (this.player = "X");
     },
     fire: function(stroke) {
     },
@@ -71,12 +94,16 @@ var model = {
         }
     }
 }
-
-var controller = {
-    handleClick: function(eventObj) {
+function init() {
+    var table = document.getElementsByClassName("cell");
+    for (var i = 0; i < table.length; i++) {
+        table[i].addEventListener("click", handleClick);
+    }
+    function handleClick(eventObj) {
         var cell = eventObj.target;
         var guess = cell.id;
         var numCell = document.getElementById(guess);
         return numCell;
     }
 }
+window.onload = init();
