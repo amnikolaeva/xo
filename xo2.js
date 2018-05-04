@@ -36,7 +36,7 @@ function currentStep() {
         else {
             dataO.push(num);
         }
-        if ((dataX.length > 2 || dataO.length > 2) && (checkWin(dataO, num) || checkWin(dataX.num))) {
+        if ((dataX.length > 2 || dataO.length > 2) && (checkWin(dataO, num) || checkWin(dataX,num))) {
             for (var i = 0; i < cell.length; i++) {
                 cell[i].removeEventListener("click", currentStep);
             }
