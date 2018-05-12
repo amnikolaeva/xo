@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head> 
-<title> Tic-Tac-Toe </title>    
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>  
-<link type="text/css" rel="stylesheet" href="xo.css" />  
-<script src="xo2.js"></script>   
-<script>
-$(document).ready(function(){
-  // jQuery code goes here		
-});
-</script>      
-</head>
-<body>
-
-<table id='board'>
-  <tr>
-    <td class="cell" id="1"></td><td class="cell" id="2"></td><td class="cell" id="3"></td>
-  </tr>
-  <tr>
-    <td class="cell" id="4"></td><td class="cell" id="5"></td><td class="cell" id="6"></td>
-  </tr>
-  <tr>
-    <td class="cell" id="7"></td><td class="cell" id="8"></td><td class="cell" id="9"></td>
-  </tr>
-  <form>
-    <input type="button" id="reset" value="Очистить">
-  </form>
-</table>
+   <head>
+      <title> Tic-Tac-Toe </title>
+      <link type="text/css" rel="stylesheet" href="xo.css" />
+   </head>
+   <body>
+      <form>
+          <input type="button" id="reset" value="Очистить">
+       </form>
+      <table id='board'>
+         <tr>
+            <td class="cell" id="1"></td>
+            <td class="cell" id="2"></td>
+            <td class="cell" id="3"></td>
+         </tr>
+         <tr>
+            <td class="cell" id="4"></td>
+            <td class="cell" id="5"></td>
+            <td class="cell" id="6"></td>
+         </tr>
+         <tr>
+            <td class="cell" id="7"></td>
+            <td class="cell" id="8"></td>
+            <td class="cell" id="9"></td>
+         </tr>
+      </table>
+      <script src="xo.js"></script>    
+   </body>
+</html>

@@ -1,109 +1,111 @@
+var cell = document.getElementsByClassName("cell");
+var reset = document.getElementById("reset");
+var currentPlayer = "O";
+var count = 0;
+var winCombinations = [
+    ["1", "2", "3"],
+    ["1", "4", "7"],
+    ["1", "5", "9"],
+    ["2", "5", "8"],
+    ["3", "5", "7"],
+    ["3", "6", "9"],
+    ["4", "5", "6"],
+    ["7", "8", "9"]
+];
+var dataX = [];
+var dataO = [];
 
-
-var view = {
-    displayStroke: function() {
-        document.getElementById("board").onclick = function(event) {
-            console.log(event);
-        }
+/**
+ * Активация (инициализация) игры
+ */
+function init() {
+    for (var i = 0; i < cell.length; i++) {
+        cell[i].addEventListener("click", handlePlayerStroke);
     }
+    reset.addEventListener("click", function() {
+        for (var i = 0; i < cell.length; i++) {
+           cell[i].innerText = "";
+       }
+    })
 }
-var model = {
-    cellsSize: 9,
-    cells: [
-        [ , , ],
-        [ , , ],
-        [ , , ]
-    ],
-    player: "X",
-    count: 0,
-    acceptStroke: function(numCell) {
-        //var combinations = [["00", "01", "02"], ["10", "11", "12"], ["20", "21", "22"]];
-        //for (var i = 0; i < this.cells.length; i++) {
-        //    var j = this.cells[i].indexOf(numCell);
-        //    if (j >= 0) {
-        //        var i = [i, j];
-        //        var index = i.join("");
-        //        return index;
-        //    }
-        //} 
-        var i = numCell.charAt(0);
-        var j = numCell.charAt(1);
-        if (!this.cells[i][j].textContent) {
-            this.cells[i][j] = this.player;
+
+/**
+ * Обработка хода игрока
+ */
+function handlePlayerStroke() {
+    var num = this.getAttribute("id");
+    if (!this.textContent) {
+        this.innerText = currentPlayer;
+        if (currentPlayer === "X") {
+            dataX.push(num);
+        } 
+        else {
+            dataO.push(num);
+        }
+        if (playerHasWon()) {
+            finishGame();
         }
         changePlayer();
-        this.count++;
-        if (this.count == 9) {
+        count++;
+        if (count == 9) {
             alert("Игра закончена");
         }
-    },  
-    changePlayer: function() {
-        if (this.player === "X") {
-            this.player = "O";
+    }
+    
+    /**
+     * Проверка выигрыша игрока
+     * @return {boolean} признак победы игрока
+     */
+    function playerHasWon() {
+        return (dataX.length > 2 || dataO.length > 2) && (checkWin(dataO, num) || checkWin(dataX, num));
+    }
+
+    /**
+     * Завершение игры
+     */
+    function finishGame() {
+        for (var i = 0; i < cell.length; i++) {
+            cell[i].removeEventListener("click", handlePlayerStroke);
         }
-        else (this.player = "X");
-    },
-    fire: function(stroke) {
-    },
-    countHorizontalMatches: function() {
-        for (var i = 0; i < cells.length; i++) {
-            var count = 0;
-            var j = 0;
-            if (this.cells[j][i] == "O") {
-                count++;
-            } 
-            else if (this.cells[j][i] == "X") {
-                return count;
-            }  
-            j++;
-        }
-    },
-    countVerticalMatches: function() {
-        for (var i = 0; i < cells.length; i++) {
-            var count = 0;
-            var j = 0;
-            if (this.cells[i][j] == "O") {
-                count++;
-            } 
-            else if (this.cells[i][j] == "X") {
-                return count;
+        alert("Победил игрок " + currentPlayer);
+    }
+}
+
+/**
+ * Смена хода пользователя с О на Х и наоборот
+ */
+function changePlayer() {
+    if (currentPlayer === "O") {
+        currentPlayer = "X";
+    }
+    else {
+        currentPlayer = "O"
+    }
+}
+
+/**
+ * Проверка ходов пользователя на выигрышную комбинацию
+ * 
+ * @param {Array<string>} userCombinations массив ячеек, содержащий ходы игрока
+ * @param {string} number идентификатор ячейки, по кот. кликнул игрок
+ * @returns {boolean} признак выигрыша
+ */
+function checkWin(userCombinations, number) {
+    for (var i = 0; i < winCombinations.length; i++) {
+        var someWinArr = winCombinations[i];
+        var count = 0;
+        if (someWinArr.indexOf(number) !== -1) {
+            for (var k = 0; k < someWinArr.length; k ++) {
+                if (userCombinations.indexOf(someWinArr[k]) !== -1) {
+                    count++;
+                    if (count === 3) {
+                        return true;
+                    }
+                }
             }
-            j++;
-        }
-    },
-    countDiagonalMatch1: function() {
-        for (var i = 0, j = 0; i < cells.length, j < cells.length; i++, j++) {
-            var count = 0;
-            if (this.cells[i][j] == "O") {
-                count++;
-            } 
-            else if (this.cells[i][j] == "X") {
-                return count;
-            }
-        }
-    },
-    countDiagonalMatch2: function() {
-        for (var i = 0, j = 2; i < cells.length, j < cells.length; i++, j--) {
-            var count = 0;
-            if (this.cells[i][j] == "O") {
-                count++;
-            } 
-            else if (this.cells[i][j] == "X") {
-                return count;
-            }
+            count = 0;
         }
     }
 }
-function init() {
-    var table = document.getElementsByClassName("cell");
-    for (var i = 0; i < table.length; i++) {
-        table[i].addEventListener("click", handleClick);
-    }
-    function handleClick(eventObj) {
-        var cell = eventObj.target;
-        var guess = cell.id;
-        var numCell = document.getElementById(guess);
-        return numCell;
-    }
-}
-window.onload = init();
+
+window.onload = init;
