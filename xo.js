@@ -87,14 +87,14 @@ function changePlayer() {
  * Проверка ходов пользователя на выигрышную комбинацию
  * 
  * @param {Array<string>} userCombinations массив ячеек, содержащий ходы игрока
- * @param {string} number идентификатор ячейки, по кот. кликнул игрок
+ * @param {string} cellId идентификатор ячейки, по кот. кликнул игрок
  * @returns {boolean} признак выигрыша
  */
-function checkWin(userCombinations, number) {
+function checkWin(userCombinations, cellId) {
     for (var i = 0; i < winCombinations.length; i++) {
         var someWinArr = winCombinations[i];
         var count = 0;
-        if (someWinArr.indexOf(number) !== -1) {
+        if (someWinArr.indexOf(cellId) !== -1) {
             for (var k = 0; k < someWinArr.length; k ++) {
                 if (userCombinations.indexOf(someWinArr[k]) !== -1) {
                     count++;
