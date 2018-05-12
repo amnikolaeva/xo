@@ -20,11 +20,11 @@ function init() {
     for (var i = 0; i < cell.length; i++) {
         cell[i].addEventListener("click", currentStep);
     }
-    //reset.addEventListener("click", function() {
-    //    for (var i = 0; i < cell.length; i++) {
-    //        cell[i].innerText = "";
-    //    }
-    //})
+    reset.addEventListener("click", function() {
+        for (var i = 0; i < cell.length; i++) {
+           cell[i].innerText = "";
+       }
+    })
 }
 function currentStep() {
     var num = this.getAttribute("id");
