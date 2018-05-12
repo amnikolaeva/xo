@@ -55,13 +55,21 @@ function changePlayer() {
     }
     else {user = "O"};
 }
-function checkWin(arr,number) {
+
+/**
+ * Проверка ходов пользователя на выигрышную комбинацию
+ * 
+ * @param {Array<string>} userCombinations массив ячеек, содержащий ходы игрока
+ * @param {string} number идентификатор ячейки, по кот. кликнул игрок
+ * @returns {boolean} признак выигрыша
+ */
+function checkWin(userCombinations, number) {
     for (var i = 0; i < winCombinations.length; i++) {
         var someWinArr = winCombinations[i];
         var count = 0;
         if (someWinArr.indexOf(number) !== -1) {
             for (var k = 0; k < someWinArr.length; k ++) {
-                if (arr.indexOf(someWinArr[k]) !== -1) {
+                if (userCombinations.indexOf(someWinArr[k]) !== -1) {
                     count++;
                     if (count === 3) {
                         return true;
